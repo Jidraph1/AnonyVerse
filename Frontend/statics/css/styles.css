@@ -1,0 +1,48 @@
+* {
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Rubik", sans-serif;
+  margin: 0;
+  padding:0;
+}
+.navbar {
+  background-color: #d5ebf8;
+}
+.custom-bg{
+    background-color:  #d5ebf8;
+}
+
+/* Favicons*/
+
+.icons a {
+    padding: 20px;
+    font-size: 20px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: rgb(47, 47, 85);
+}
+/* .center-container{} */
+
+
+.icons a:hover {
+    opacity: 0.7;
+}
+
+footer{
+    background-color: c;
+}
+
+/* Button */
+.custom-btn-primary{
+    width: 30%;
+    background-color: #9ac0d6;
+}
+
+.custom-underline {
+    text-decoration: underline;
+    text-decoration-color: rgb(70, 25, 154); 
+    text-underline-offset: 8px; 
+    width: 120px;
+
+  }
