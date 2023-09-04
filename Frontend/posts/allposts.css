@@ -51,3 +51,19 @@ aside .title-item {
     padding: .6rem 1rem;
     cursor: pointer;
 }
+
+
+.comment-card {
+    border: 1px solid #e2e2e2;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.child-comment {
+    margin-left: 20px;
+}
+.action-buttons {
+    text-align: right;
+}
+.action-buttons button {
+    margin-left: 10px;
+}
