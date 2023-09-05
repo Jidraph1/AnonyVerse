@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to Bootstrap CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../posts/allposts.css">
+    <link rel="stylesheet" href="../statics/css/styles.css">
+    <style>
+        /* Profile header styling */
+        .profile-header {
+            background-color: #d5ebf8; /* Header background color */
+            color: black; /* Header text color */
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Profile picture styling */
+        .profile-picture {
+            width: 150px; /* Adjust the width as needed */
+            height: 150px; /* Adjust the height as needed */
+            border-radius: 50%;
+            border: 3px solid #fff; /* Profile picture border color */
+        }
+
+        /* Bio and user information styling */
+        .profile-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Style for the container of post cards */
+        .post-container {
+            margin-top: 30px;
+        }
+
+        /* Style for individual posts (cards) */
+        .post-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+     
+
+    <div class="container-fluid">
+        <div class="row">
+      <!-- hamburger effect -->
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="#">Your Logo</a> -->
+        </nav>
+      
+            <!-- Create a collapsible sidebar -->
+            <aside class="col-md-2 d-md-block d-none sidebar collapse" id="sidebarCollapse">
+              <div class="upper rounded-top-left rounded-top-right">
+                  <img src="/Frontend/statics/images/anonyverse.svg" alt="Logo" width="300" height="50">
+                  <a href="../posts/allposts.html" class="title-item">
+                      <iconify-icon icon="solar:home-bold" style="font-size: 35px;"></iconify-icon>
+                      <h4 class="title mt-2">Home</h4>
+                  </a>
+                  <a href="../profile/profile.html" class="title-item">
+                      <iconify-icon icon="iconamoon:profile-circle-fill" style="font-size: 35px;"></iconify-icon>
+                      <h4 class="title mt-2">Profile</h4>
+                  </a>
+                  <a href="#" class="title-item" data-toggle="modal" data-target="#exampleModal">
+                      <iconify-icon icon="icon-park-twotone:add" style="font-size: 35px; " ></iconify-icon>
+                      <h4 class="title mt-2">Add Post</h4>
+                  </a>
+              </div>
+          
+              <!-- Push the Logout button to the bottom -->
+              <div class="bottom">
+                  <a href="/Frontend/auth/login.html" class="title-item" id="logout">
+                      <iconify-icon class="icon" icon="solar:logout-2-outline" style="font-size: 35px;"></iconify-icon>
+                      <h4 class="title mt-2">Logout</h4>
+                  </a>
+              </div>
+          </aside>
+          
+            
+            <!-- Create a navigation toggle button for smaller screens -->
+            <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#navbarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Main section -->
+            <main class="col-md-8 container text-center ">
+
+                <img src="/Frontend/statics/images/anonyverse.svg" alt="Logo" width="300" height="150">
+              <!-- Profile header -->
+     <div class="profile-header mx-auto mt-lg-3" style="max-width:60%;" >
+        <!-- Profile picture -->
+        <img src="../statics/images/paul.png" alt="Profile Picture" class="profile-picture">
+        <!-- Username -->
+        <h2>Kenneth_the_first</h2>
+        <!-- Follower/Following counts -->
+        <p>Followers: 1000 | Following: 500</p>
+        <div class="d-flex flex-column text-sm-start">
+            <div class="form-group">
+                
+            </div><label for="fileInput"> <b>Profile Picture</b></label> <br>
+                <input type="file" class="form-control-file" id="fileInput">
+            <div class="form-group">
+                <label for="bioTextarea"><b>Bio:</b></label>
+                <textarea class="form-control" id="bioTextarea"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn custom-btn-primary mt-3 ">Update</button>
+            </div>
+        </div>
+   
+    </div>
+
+    <!-- Profile information -->
+    <div class="container profile-info">
+        <!-- Previous posts -->
+        <h3>Previous Posts</h3>
+        <div class="row post-container">
+            <!-- Post 1 -->
+            <div class="col-md-4">
+                <div class="card post-card">
+                    <div class="card-body" style="height: 200px;"> <!-- Adjust the height as needed -->
+                        <img src="../statics/images/bike.jpg" class="card-img-top mx-auto img-fluid clickable-image"  data-toggle="modal"
+                        data-target="#imageModal" alt="dog post" style="object-fit: cover; max-width: 100%; max-height: 100%; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add more posts as needed -->
+            <div class="col-md-4">
+                <div class="card post-card">
+                    <div class="card-body" style="height: 200px;"> <!-- Adjust the height as needed -->
+                        <img src="../statics/images/Drinks.jpg" class="card-img-top mx-auto  img-fluid" alt="dog post" style="object-fit: cover; max-width: 100%; max-height: 100%; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="col-md-4">
+                <div class="card post-card">
+                    <div class="card-body" style="height: 200px;"> <!-- Adjust the height as needed -->
+                        <img src="../statics/images/lab.jpg" class="card-img-top mx-auto  img-fluid" alt="dog post" style="object-fit: cover; max-width: 100%; max-height: 100%; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add more posts as needed -->
+            <div class="col-md-4">
+                <div class="card post-card">
+                    <div class="card-body" style="height: 200px;"> <!-- Adjust the height as needed -->
+                        <img src="../statics/images/Diary-bro1.svg" class="card-img-top mx-auto  img-fluid" alt="dog post" style="object-fit: cover; max-width: 100%; max-height: 100%; border-radius: 10px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Modal Image -->
+        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body text-sm-start" >
+                        <!-- Display the image -->
+                        <img
+                            src="../statics/images/bike.jpg"
+                            class="img-fluid"
+                            alt="dog post"
+                        >
+      
+                        <!-- Display comments from previous posts -->
+                        <h5 class="modal-title" id="imageModalLabel">Image Caption</h5>
+                        <p>“Tough Times Don't last, Tough People do. Because no good story starts with that one time I ate salad”</p>
+      
+                        <p class="mt-3">Likes: 123</p>
+                        <div class="container mt-5">
+                          <div class="comment-card">
+                            <h6 class="mt-3">Jidraph Kimachia</h6>
+                            <p>This saying is often used to motivate and uplift individuals who are facing hardships or struggling with adversity.</p>
+                            <div class="action-buttons">
+                                <button class="btn btn-outline-primary btn-sm">Edit</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </div>
+                          </div>
+                          
+                          <!-- Child comment with greater left margin -->
+                          <div class="comment-card child-comment">
+                            <h6 class="mt-3">Daniel Karanja</h6>
+                            <p>Behind every successful person, there is a lot of coffee."</p>
+                            <div class="action-buttons">
+                              <button class="btn btn-outline-primary btn-sm">Edit</button>
+                              <button class="btn btn-danger btn-sm">Delete</button>
+                            </div>
+                              <!-- Add more child comments as needed -->
+                          </div>
+                      </div>
+                       
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Close button -->
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </main>
+            
+            <!-- Right side (col-md-3) disappears on smaller screens -->
+            <section class="col-md-2 d-md-block d-none">
+              <!-- <aside class="col-md-2 d-md-block d-none"> -->
+                <div class="upper rounded-top-left rounded-top-right text-center">
+                  <p><img src="../statics/images/paul.png" class="rounded-circle mt-2 align-self-start" style="width: 40px; height: 40px;">
+                    Kenneth_the_first </p>
+                    <p><iconify-icon icon="iconamoon:profile-circle-fill" style="font-size: 20px;"></iconify-icon> 2.6k Followers</p>
+                   <h6>About:</h6> 
+                   <p>Professional procrastinator and aspiring nap enthusiast. If life gives me lemons, I'll probably try to make lemonade... or just order pizza."</p>
+      
+                    <h6> People of interest</h6>
+                    <input class="form-control form-control-sm mt-4 search_bar" type="text" placeholder="Search" aria-label=".form-control-sm example"style="border: none;
+                    border-bottom: 1px solid #000;
+                    background: transparent; 
+                    max-width: 100%;
+                    padding: 5px;
+                    margin-top: 4px;">
+                </div>
+      
+                <div class="card" style=" background-color: transparent !important;
+                border: none !important;">
+                  <div class="card-body">
+                      <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px;">
+                      <small class="card-title">Daniel Karanja</small>
+                      <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center;">Follow</a>
+                  </div>
+                  <div class="card-body">
+                    <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px;">
+                    <small class="card-title">Daniel Karanja</small>
+                    <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center;">Follow</a>
+                </div>
+                <div class="card-body">
+                  <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px;">
+                  <small class="card-title">Daniel Karanja</small>
+                  <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center;">Follow</a>
+              </div>
+              </div>
+            <!-- </aside> -->
+            </section>
+        </div>
+      </div>
+      <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!-- Include Bootstrap JS and jQuery (optional) if needed for functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
