@@ -1,0 +1,14 @@
+CREATE DATABASE anonyverse
+GO
+
+USE anonyverse;
+GO
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY(1,1),
+    Username NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(255) NOT NULL,
+    Password NVARCHAR(255) NOT NULL,
+    ProfilePicture NVARCHAR(255),
+    Bio NVARCHAR(MAX)
+);
