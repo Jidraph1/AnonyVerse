@@ -53,3 +53,41 @@ export const getAllPosts = async (req, res) => {
         res.status(500).json({ Error: error.message });
     }
 };
+
+export const deletePost = async (req, res) => {
+    try {
+        const { postid, userid } = req.body; // Assuming you pass both postid and userid in the request body
+
+        const conn = await pool;
+
+        if (conn.connected) {
+            // Check if the user has permission to delete the post
+            const permissionQuery = await conn
+                .request()
+                .input("postid", postid)
+                .input("userid", userid)
+                .query("SELECT 1 FROM Posts WHERE postid = @postid AND userid = @userid");
+
+            if (permissionQuery.recordset.length === 0) {
+                res.status(403).json({ Error: "Permission denied to delete this post" });
+                return;
+            }
+
+            const result = await conn
+                .request()
+                .input("postid", postid)
+                .execute("DeletePostProcedure");
+
+            if (result.rowsAffected[0] === 0) {
+                res.status(404).json({ Error: "Post not found" });
+            } else {
+                res.status(200).json({ message: "Post deleted successfully" });
+            }
+        } else {
+            res.status(500).json({ message: "Error connecting to the database" });
+        }
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+};
+

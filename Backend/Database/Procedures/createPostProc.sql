@@ -33,3 +33,14 @@ GO
 
 -- EXEC GetAllPosts;
 -- GO
+
+-- DElete post
+
+CREATE PROCEDURE DeletePostProcedure
+    @postid NVARCHAR(200)
+AS
+BEGIN
+    DELETE FROM Posts
+    WHERE postid = @postid;
+END;
+GO
