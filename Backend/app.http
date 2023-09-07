@@ -3,8 +3,8 @@ POST http://localhost:4505/users/register
 Content-Type: application/json
 
 {
-    "username":"jidraph1",
-    "email":"jidraph1@gmail.com",
+    "username":"kevin",
+    "email":"kevin1@gmail.com",
     "password":"pass"
 }
 
@@ -13,7 +13,7 @@ POST http://localhost:4505/users/login
 Content-Type: application/json
 
 {
-    "email":"jidraph1@gmail.com",
+    "email":"kevin1@gmail.com",
     "password":"pass"
 }
 
@@ -29,13 +29,31 @@ POST http://localhost:4505/posts/new-post
 Content-Type: application/json
 
 {    
-    "userid": "8e72a6c2-65cc-4d14-baaf-cba9f242e1b9",
-    "postCaption": "Bianca Nyambura.",
-    "postImage": "https://example.com/images/post123.jpg"
+    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
+    "postCaption": "Loyal Dog.",
+    "postImage": "dog.jpg"
 }
 
 
 ### Get All Posts
 GET http://localhost:4505/posts/posts
 Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImppZHJhcGgxIiwiZW1haWwiOiJqaWRyYXBoMUBnbWFpbC5jb20iLCJ1c2VyaWQiOiI4ZTcyYTZjMi02NWNjLTRkMTQtYmFhZi1jYmE5ZjI0MmUxYjkiLCJpYXQiOjE2OTQwNzUwNTksImV4cCI6MTY5NDA4OTQ1OX0.XnGprusuZ7dwZmbU7a9D3sbpkFq-v6rlzCrEPr5xL7k
+token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWwiOiJrZXZpbjFAZ21haWwuY29tIiwidXNlcmlkIjoiM2E4NWI2NTYtZjVhYS00M2VmLWEyMzctZWE3OTFjZjA1YTJiIiwiaWF0IjoxNjk0MDg3ODU0LCJleHAiOjE2OTQxMDIyNTR9.7MU6gWNp90RMapegDlqVNlpMfp8u-ijK6Ari_QSJq14
+
+### Likes
+POST http://localhost:4505/likes/checklikes
+Content-Type: application/json
+
+{
+    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
+    "postid": "06143c86-dd9e-4f48-bcad-23168fe607f4"
+}
+
+### Unlike post
+POST http://localhost:4505/likes/unlikepost
+Content-Type: application/json
+
+{
+    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
+    "postid": "06143c86-dd9e-4f48-bcad-23168fe607f4"
+}

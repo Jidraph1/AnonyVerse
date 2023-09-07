@@ -16,4 +16,7 @@ END;
 GO
 
 SELECT * FROM Users
+GO
+SELECT * FROM Posts
+GO
 

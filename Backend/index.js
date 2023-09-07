@@ -3,6 +3,7 @@ import path from 'path'
 import cors from 'cors';
 import { userRouter } from './Routers/usersRouter.js'
 import { postRouter } from './Routers/usersRouter.js'
+import { likeRouter } from './Routers/usersRouter.js'
 
 
 // const cors = require ('cors')
@@ -16,6 +17,8 @@ app.use(cors())
 
 app.use('/users', userRouter)
 app.use('/posts', postRouter)
+app.use('/likes', likeRouter)
+
 app.use((err, req, res, next)=>{
     res.json({Error: err})
 })

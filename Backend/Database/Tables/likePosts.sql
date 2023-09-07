@@ -1,0 +1,16 @@
+USE anonyverse
+GO
+
+CREATE TABLE Likes (
+    likeid UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    userid VARCHAR(200) REFERENCES Users(userid),
+    postid NVARCHAR(200) REFERENCES Posts(postid),
+    likeDate DATETIME DEFAULT GETDATE()
+);
+GO
+
+-- DROP TABLE Likes
+
+SELECT * FROM Likes 
+
+SELECT * FROM Posts
