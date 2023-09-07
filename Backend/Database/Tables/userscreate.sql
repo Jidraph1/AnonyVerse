@@ -1,0 +1,17 @@
+-- CREATE DATABASE anonyverse
+-- GO
+
+USE anonyverse;
+GO
+
+CREATE TABLE Users (
+    userid VARCHAR(200) PRIMARY KEY, 
+    username NVARCHAR(200) UNIQUE NOT NULL,
+    email NVARCHAR(200) UNIQUE NOT NULL,
+    password NVARCHAR(200) NOT NULL,
+    profilePicture NVARCHAR(200) DEFAULT NULL,
+    bio NVARCHAR(MAX) DEFAULT NULL,
+);
+GO
+
+-- DROP TABLE Users
