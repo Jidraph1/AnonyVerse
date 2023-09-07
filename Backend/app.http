@@ -16,3 +16,26 @@ Content-Type: application/json
     "email":"jidraph1@gmail.com",
     "password":"pass"
 }
+
+
+
+
+
+
+
+
+### Create Posts
+POST http://localhost:4505/posts/new-post
+Content-Type: application/json
+
+{    
+    "userid": "8e72a6c2-65cc-4d14-baaf-cba9f242e1b9",
+    "postCaption": "Bianca Nyambura.",
+    "postImage": "https://example.com/images/post123.jpg"
+}
+
+
+### Get All Posts
+GET http://localhost:4505/posts/posts
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImppZHJhcGgxIiwiZW1haWwiOiJqaWRyYXBoMUBnbWFpbC5jb20iLCJ1c2VyaWQiOiI4ZTcyYTZjMi02NWNjLTRkMTQtYmFhZi1jYmE5ZjI0MmUxYjkiLCJpYXQiOjE2OTQwNzUwNTksImV4cCI6MTY5NDA4OTQ1OX0.XnGprusuZ7dwZmbU7a9D3sbpkFq-v6rlzCrEPr5xL7k

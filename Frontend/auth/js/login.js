@@ -10,15 +10,15 @@ const errorContainer = document.getElementById('errorContainer');
             errorContainer.textContent = '';
         }
 
-        async function checkUserInDatabase(username, password) {
+        async function checkUserInDatabase(email, password) {
             try {
                 // Simulate server-side validation (replace with actual server code)
                 const usersInDatabase = [
-                    { username: 'john_doe', password: 'password123' },
-                    { username: 'jane_smith', password: 'letmein' }
+                    { email: 'john_doe', password: 'password123' },
+                    { email: 'jane_smith', password: 'letmein' }
                 ];
 
-                const user = usersInDatabase.find(u => u.username === username);
+                const user = usersInDatabase.find(u => u.email === email);
 
                 if (user && user.password === password) {
                     // User exists and password is correct
@@ -35,17 +35,17 @@ const errorContainer = document.getElementById('errorContainer');
         function loginUser() {
             clearError();
 
-            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
             const password = document.getElementById('passwd').value;
 
             // Validate input
-            if (!username || !password) {
+            if (!email || !password) {
                 displayError('Please fill in all fields.');
                 return;
             }
 
             // Check if the user exists in the database
-            const userExists = checkUserInDatabase(username, password);
+            const userExists = checkUserInDatabase(email, password);
 
             if (userExists) {
                 // Redirect to the desired page (e.g., allposts.html)
