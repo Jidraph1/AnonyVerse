@@ -30,8 +30,8 @@ Content-Type: application/json
 
 {    
     "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postCaption": "Loyal Dog.",
-    "postImage": "dog.jpg"
+    "postCaption": "nereaaaaaaaaaa",
+    "postImage": "nerea.png"
 }
 
 
@@ -48,7 +48,7 @@ token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWw
 
 {
     "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postid": "06143c86-dd9e-4f48-bcad-23168fe607f4"
+    "postid": "2d6ddd00-7ef4-4cdd-bf13-8b2f1533d79d"
 }
 
 ### Likes
@@ -56,8 +56,8 @@ POST http://localhost:4505/likes/checklikes
 Content-Type: application/json
 
 {
-    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postid": "06143c86-dd9e-4f48-bcad-23168fe607f4"
+    "postid": "3592bfd2-e726-4ca4-bd23-bde677f975fe",
+    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b"
 }
 
 ### Unlike post
@@ -65,8 +65,22 @@ POST http://localhost:4505/likes/unlikepost
 Content-Type: application/json
 
 {
-    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postid": "06143c86-dd9e-4f48-bcad-23168fe607f4"
+   "postid": "3592bfd2-e726-4ca4-bd23-bde677f975fe",
+   "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b"
 }
 
+
+### Comments
+POST http://localhost:4505/comments/addcomment
+Content-Type: application/json
+
+{
+   "postid":"8d1bf9e5-cc79-4e6e-a6a8-53af05aeeb80",
+   "userid":"3a85b656-f5aa-43ef-a237-ea791cf05a2b",
+   "commentText": "wastage of our time"
+}
+
+### GetCommentsByPostID
+GET http://localhost:4505/comments/getcommentsbyid/8d1bf9e5-cc79-4e6e-a6a8-53af05aeeb80
+Content-Type: application/json
 
