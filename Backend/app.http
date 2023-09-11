@@ -3,8 +3,8 @@ POST http://localhost:4505/users/register
 Content-Type: application/json
 
 {
-    "username":"kevin",
-    "email":"kevin1@gmail.com",
+    "username":"onan",
+    "email":"onan@gmail.com",
     "password":"pass"
 }
 
@@ -13,7 +13,7 @@ POST http://localhost:4505/users/login
 Content-Type: application/json
 
 {
-    "email":"kevin1@gmail.com",
+    "email":"onan@gmail.com",
     "password":"pass"
 }
 
@@ -27,10 +27,11 @@ Content-Type: application/json
 ### Create Posts
 POST http://localhost:4505/posts/new-post
 Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9uYW4iLCJlbWFpbCI6Im9uYW5AZ21haWwuY29tIiwidXNlcmlkIjoiNDA3ZGMzZjgtN2ExZi00ZjgxLWJhOWUtNmVkZGRjNmE0N2M5IiwiaWF0IjoxNjk0MzkzMTEwLCJleHAiOjE2OTQ0MDc1MTB9.JnghgaDJXcPLa0e9_WyoLhPzUqpE1qcQuu_8fRBL934
 
 {    
-    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postCaption": "nereaaaaaaaaaa",
+    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9",
+    "postCaption": "Goodtimes last",
     "postImage": "nerea.png"
 }
 
@@ -38,7 +39,7 @@ Content-Type: application/json
 ### Get All Posts
 GET http://localhost:4505/posts/posts
 Content-Type: application/json
-token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWwiOiJrZXZpbjFAZ21haWwuY29tIiwidXNlcmlkIjoiM2E4NWI2NTYtZjVhYS00M2VmLWEyMzctZWE3OTFjZjA1YTJiIiwiaWF0IjoxNjk0MDg3ODU0LCJleHAiOjE2OTQxMDIyNTR9.7MU6gWNp90RMapegDlqVNlpMfp8u-ijK6Ari_QSJq14
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9uYW4iLCJlbWFpbCI6Im9uYW5AZ21haWwuY29tIiwidXNlcmlkIjoiNDA3ZGMzZjgtN2ExZi00ZjgxLWJhOWUtNmVkZGRjNmE0N2M5IiwiaWF0IjoxNjk0MzkzMTEwLCJleHAiOjE2OTQ0MDc1MTB9.JnghgaDJXcPLa0e9_WyoLhPzUqpE1qcQuu_8fRBL934
 
 
 ### Delete Post
@@ -47,9 +48,11 @@ Content-Type: application/json
 token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWwiOiJrZXZpbjFAZ21haWwuY29tIiwidXNlcmlkIjoiM2E4NWI2NTYtZjVhYS00M2VmLWEyMzctZWE3OTFjZjA1YTJiIiwiaWF0IjoxNjk0MDg3ODU0LCJleHAiOjE2OTQxMDIyNTR9.7MU6gWNp90RMapegDlqVNlpMfp8u-ijK6Ari_QSJq14
 
 {
-    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-    "postid": "2d6ddd00-7ef4-4cdd-bf13-8b2f1533d79d"
+    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9",
+    "postid": "762628e4-226e-4aac-84c7-8ef05e3dec25"
 }
+
+
 
 ### Likes
 POST http://localhost:4505/likes/checklikes
@@ -83,4 +86,37 @@ Content-Type: application/json
 ### GetCommentsByPostID
 GET http://localhost:4505/comments/getcommentsbyid/8d1bf9e5-cc79-4e6e-a6a8-53af05aeeb80
 Content-Type: application/json
+
+# to be fixed *********************************
+### edit comments 
+PUT http://localhost:4505/comments/editcomment/2ccf1694-c119-4071-8072-ba31a13dff43
+
+{
+    "commentText": "This is the edited comment"
+}
+
+
+
+### following 
+POST http://localhost:4505/users/follow
+Content-Type: application/json
+
+{
+    "followerUserId": "8e72a6c2-65cc-4d14-baaf-cba9f242e1b9",
+    "followingUserId": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
+}
+
+
+
+### unfollow
+POST http://localhost:4505/users/unfollow
+Content-Type: application/json
+
+{
+    "followerUserId": "3985457b-df76-4e10-94dc-671691669231",
+    "followingUserId": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
+}
+
+### count followers
+GET http://localhost:4505/users/countfollow/407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9
 

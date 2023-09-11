@@ -155,7 +155,7 @@ export const getCommentsByPostId = async (req, res) => {
                 .input('postid', postid)
                 .query(getCommentsQuery);
 
-                
+
             res.status(200).json({ comments: comments.recordset });
         } else {
             res.status(500).json({ message: 'Error connecting to the database' });
@@ -164,3 +164,39 @@ export const getCommentsByPostId = async (req, res) => {
         res.status(500).json({ Error: error.message });
     }
 };
+
+
+// editComment section
+export const editComment = async (req, res) => {
+    try {
+        const { commentid } = req.params;
+        const { commentText } = req.body;
+        const userid = req.user.userid; // Assuming you have user information in the request
+
+        const conn = await pool; // Assuming you have a database connection pool
+
+        if (conn.connected) {
+            // Call the stored procedure to edit the comment
+            const result = await conn
+                .request()
+                .input('commentid', commentid)
+                .input('commentText', commentText)
+                .input('userid', userid)
+                .execute('EditComment');
+
+            // Check the result to determine if the edit was successful
+            if (result.returnValue === 0) {
+                res.status(200).json({ message: result.output.Message });
+            } else {
+                res.status(403).json({ message: 'Unauthorized to edit this comment' });
+            }
+        } else {
+            res.status(500).json({ message: 'Error connecting to the database' });
+        }
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+};
+
+
+

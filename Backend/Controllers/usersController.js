@@ -79,3 +79,84 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ Error: error.message });
   }
 };
+
+
+// Followers controllers
+// Follow User
+export const followUser = async (req, res) => {
+    try {
+        const { followerUserId, followingUserId } = req.body;
+
+        const conn = await pool;
+
+        if (conn.connected) {
+            // Execute the FollowUser stored procedure
+            await conn
+                .request()
+                .input('followerUserId', followerUserId)
+                .input('followingUserId', followingUserId)
+                .execute('FollowUser');
+
+            res.status(200).json({ message: 'User followed successfully' });
+        } else {
+            res.status(500).json({ message: 'Error connecting to the database' });
+        }
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+};
+
+// Unfollow User
+export const unfollowUser = async (req, res) => {
+    try {
+        const { followerUserId, followingUserId } = req.body;
+
+        const conn = await pool;
+
+        if (conn.connected) {
+            // Execute the UnfollowUser stored procedure
+            await conn
+                .request()
+                .input('followerUserId', followerUserId)
+                .input('followingUserId', followingUserId)
+                .execute('UnfollowUser');
+
+            res.status(200).json({ message: 'User unfollowed successfully' });
+        } else {
+            res.status(500).json({ message: 'Error connecting to the database' });
+        }
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+};
+
+
+
+export const getFollowersCount = async (req, res) => {
+    try {
+        const { userId } = req.params; // Assuming you pass the user ID as a URL parameter
+
+        const conn = await pool;
+
+        if (conn.connected) {
+            const query = `
+            SELECT COUNT(*) AS followersCount
+            FROM followers
+            WHERE following_user_id = @userId;
+            
+            `;
+
+            const result = await conn
+                .request()
+                .input('userId', userId)
+                .query(query);
+
+            const followersCount = result.recordset[0].followersCount;
+            res.status(200).json({ followersCount });
+        } else {
+            res.status(500).json({ message: 'Error connecting to the database' });
+        }
+    } catch (error) {
+        res.status(500).json({ Error: error.message });
+    }
+};
