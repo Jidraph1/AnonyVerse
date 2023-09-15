@@ -20,7 +20,6 @@ userRouter.get('/profile/:userid', getProfile)
 userRouter.put('/updateprofile/:userid',userAuth, updateProfile)
 
 
-http://localhost:4505/profile/81b18212-6cbe-4d76-8364-7b725d9211fc
 // Posts
 postRouter.post('/new-post', createPost)
 postRouter.get('/posts', getAllPosts)

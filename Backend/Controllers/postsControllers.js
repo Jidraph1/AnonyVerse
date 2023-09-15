@@ -6,8 +6,7 @@ import { pool } from "../Config/config.js";
 export const createPost = async (req, res) => {
     try {
         const {userid, postCaption, postImage } = req.body;
-        // console.log(req.info);
-        // const userId = req.info.userid;
+
         const postId = v4();
         const postDate = new Date();
 
@@ -56,7 +55,7 @@ export const getAllPosts = async (req, res) => {
 
 export const deletePost = async (req, res) => {
     try {
-        const { postid, userid } = req.body; // Assuming you pass both postid and userid in the request body
+        const { postid, userid } = req.body; 
 
         const conn = await pool;
 
@@ -98,19 +97,15 @@ export const deletePost = async (req, res) => {
 // addComment 
 export const addComment = async (req, res) => {
     try {
-        // Extract comment data from the request body, except for commentid and commentDate
         const { postid, userid, commentText } = req.body;
-
-        // Generate a unique comment ID using UUID
         const commentid = v4();
-
         // Get the current date and time
         const commentDate = new Date();
 
-        const conn = await pool; // Assuming you have a database connection pool
+        const conn = await pool; 
 
         if (conn.connected) {
-            // Execute the AddComment stored procedure
+            
             const addCommentQuery = `
                 EXEC AddComment @commentid, @postid, @userid, @commentText, @commentDate;
             `;

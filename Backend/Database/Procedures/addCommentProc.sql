@@ -21,4 +21,6 @@ END;
 GO
 
 
+
+SELECT * FROM Comments
 -- DROP PROCEDURE AddComment;

@@ -111,6 +111,13 @@ document.addEventListener("DOMContentLoaded", async function () {
   await renderAllPosts();
 
   // Other initialization code or event listeners can go here
+
+//   on modal click
+document.getElementById("modal-img").addEventListener("click",()=>{
+    const postId = document.getElementById("modal-img").classList[4]
+    displayCommentsForPost(postId)
+    
+})
 });
 
 async function renderAllPosts() {
@@ -127,7 +134,7 @@ async function renderAllPosts() {
           <div class="card shadow shadow-right m-3" style="width: 40rem; background-color: #e3e9ed;">
           <small><img src="../statics/images/paul.png"  class="rounded-circle mt-2 align-self-start" style="width: 40px; height: 40px;" id="userProfilepicture">
           Stranger</small> 
-              <img src="${post.postImage}" class="card-img-top mx-auto mt-3 clickable-image" alt="newPost" style="max-width: 80%; max-height: 80%; padding: 10px;" data-toggle="modal" data-target="#${modalId}">
+              <img id="modal-img" src="${post.postImage}" class="card-img-top mx-auto mt-3 clickable-image ${post.postid}" alt="newPost" style="max-width: 80%; max-height: 80%; padding: 10px;" data-toggle="modal" data-target="#${modalId}">
 
             <small class="text-muted">${post.postDate}</small>
             <div class="card-body">
@@ -163,9 +170,9 @@ async function renderAllPosts() {
                     <p class="text-center mt-3">“${post.postCaption}”</p>
 
                     <p class="mt-3">Likes: 123</p>
-                    <div class="container mt-5">
+                    <div class="container mt-5" id="comments-container">
                       <div class="comment-card">
-                        <h6 class="mt-3">Jidraph Kimachia</h6>
+                        <h6 class="mt-3" id="commentUsername">Jidraph Kimachia</h6>
                         <p id="commentGoesHere" >This saying is often used to motivate and uplift individuals who are facing hardships or struggling with adversity.</p>
                         <div class="action-buttons">
                             <button class="btn btn-outline-primary btn-sm">Edit</button>
@@ -217,13 +224,6 @@ async function addComment(postid) {
 
   const commentText = document.querySelector("#comment-input").value;
   try {
-    // Debugging statements
-    console.log("Inside addComment function");
-    console.log("postid:", postid);
-    console.log("commentText:", commentText);
-    console.log("token:", token);
-
-    // Make an HTTP POST request to add a comment
     const response = await fetch("http://localhost:4505/comments/addcomment", {
       method: "POST",
       headers: {
@@ -241,27 +241,12 @@ async function addComment(postid) {
       console.log("Comment added successfully.");
 
       // Clear the comment input field
-      const commentInput = document.querySelector(
-        "#comment-input"
-      );
+      const commentInput = document.querySelector("#comment-input");
       commentInput.value = "";
 
-      // Display the comment in the post card
-      const commentContainer = commentInput.closest(".comment-card");
-      const commentGoesHere =
-        commentContainer.querySelector("#commentGoesHere");
-      const commentOwnerName = getUserIdFromToken(token); 
-      const newCommentHTML = `
-            <div class="comment">
-                <h6 class="mt-3">${commentOwnerName}</h6>
-                <p>${commentText}</p>
-                <div class="action-buttons">
-                    <button class="btn btn-outline-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </div>
-            </div>
-        `;
-      commentGoesHere.innerHTML += newCommentHTML;
+      displayCommentsForPost(postid);
+
+
     } else {
       console.error("Failed to add a comment.");
     }
@@ -269,7 +254,52 @@ async function addComment(postid) {
     console.error("An error occurred while adding a comment:", error);
   }
 }
+async function displayCommentsForPost(postid) {
+    try {
+      const response = await fetch(`http://localhost:4505/comments/getcommentsbyid/${postid}`, {
+        method: "GET",
+      });
+  
+      if (response.status === 200) {
+        const commentsData = await response.json();
+        const commentsContainer = document.getElementById("comments-container");
+  
+        // Clear any existing comments
+        commentsContainer.innerHTML = "";
+        console.log('========>',commentsData.comments);
+        // Check if commentsData.comments is an array and not empty
+        if (Array.isArray(commentsData.comments) && commentsData.comments.length > 0) {
+          commentsData.comments.forEach((comment) => {
+            const commentElement = document.createElement("div");
+            commentElement.className = "comment-card";
+  
+            // Construct the comment HTML with username and text
+            commentElement.innerHTML = `
+              <h6 class="mt-3" id="commentUsername">${comment.username || 'Anonymous'}</h6>
+              <p id="commentGoesHere">${comment.commentText}</p>
+              <div class="action-buttons">
+                  <button class="btn btn-outline-primary btn-sm">Edit</button>
+                  <button class="btn btn-danger btn-sm">Delete</button>
+              </div>
+            `;
+            // console.log(comment.commentText)
+  
+            // Append the comment to the comments container
+            commentsContainer.appendChild(commentElement);
+          });
+        } else {
+          // Handle the case where no comments were returned
+          commentsContainer.innerHTML = "No comments available.";
+        }
+      } else {
+        console.error("Failed to fetch comments for the post.");
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching comments:", error);
+    }
+  }
 
+// Get user Id From Token Function
 function getUserIdFromToken(token) {
   try {
     if (!token) {
@@ -297,3 +327,5 @@ function getUserIdFromToken(token) {
     return null;
   }
 }
+
+

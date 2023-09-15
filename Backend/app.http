@@ -94,7 +94,7 @@ Content-Type: application/json
 }
 
 ### GetCommentsByPostID
-GET http://localhost:4505/comments/getcommentsbyid/8786834e-6de0-4c6e-acdc-5ec495adeaf7
+GET http://localhost:4505/comments/getcommentsbyid/7ff97c74-9508-4f89-86fd-e2138b669f9e
 Content-Type: application/json
 
 # to be fixed *********************************

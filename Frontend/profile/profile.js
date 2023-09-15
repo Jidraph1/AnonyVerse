@@ -32,15 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
       return payload.userId;
     } catch (error) {
       console.error("Failed to extract user ID from token:", error);
-      return null; // Handle the error gracefully in your code
+      return null; 
     }
   }
 
   // Function to fetch user profile data from the API
   async function fetchUserProfile(userid, token) {
-    // Pass the token as a parameter
     try {
-      // Make an HTTP GET request to your API endpoint
       const response = await fetch(
         `http://localhost:4505/users/profile/${userid}`,
         {
@@ -75,13 +73,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   if (userid) {
-    fetchUserProfile(userid, token); // Pass the token
+    fetchUserProfile(userid, token); 
   } else {
     console.error("User ID is undefined. Unable to fetch user profile.");
   }
  
   profileForm.addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the form from actually submitting
+    event.preventDefault(); 
 
     const imgObj = profileImageInput.files[0]; 
 
@@ -104,17 +102,16 @@ document.addEventListener("DOMContentLoaded", function () {
       body: cloudinary_form_data,
     });
 
-    // Get the picture_url from the Cloudinary response
     const picture_url = await cloudinary_response.then((data) => {
       return data.json();
     });
 
-    // console.log(picture_url);
+
 
     // Fetch data from form inputs
-    const updatedData = new FormData(); // Use FormData to handle file uploads
+    const updatedData = new FormData(); 
     updatedData.append("bio", bioTextarea.value);
-    updatedData.append("profilePicture", picture_url.secure_url); // Use profileImageInput for file upload
+    updatedData.append("profilePicture", picture_url.secure_url);
 
     try {
       // Make an HTTP POST request to update the user profile
