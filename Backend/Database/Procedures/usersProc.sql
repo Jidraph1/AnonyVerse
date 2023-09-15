@@ -31,11 +31,28 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE uspGetUserProfile
+    @userid VARCHAR(200)
+AS
+BEGIN
+    SELECT username, bio, profilePicture
+    FROM Users
+    WHERE userid = @userid;
+END;
+GO
+
+
+SELECT p.*, u.username, u.profilePicture
+FROM Posts p
+JOIN Users u ON p.userid = u.userid
+ORDER BY p.postDate DESC;
+
 
 
 SELECT * FROM Users
 GO
 SELECT * FROM Posts
 GO
-
-SELECT * FROM Followees
+SELECT * FROM Comments 
+GO
+SELECT * FROM Followers

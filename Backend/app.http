@@ -3,17 +3,18 @@ POST http://localhost:4505/users/register
 Content-Type: application/json
 
 {
-    "username":"onan",
-    "email":"onan@gmail.com",
-    "password":"pass"
+    "username":"Milly",
+    "email":"milly@gmail.com",
+    "password":"pass1"
 }
 
 ### Login
 POST http://localhost:4505/users/login
 Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWxHIiwiZW1haWwiOiJtaWNoYWVsZ0BnbWFpbC5jb20iLCJ1c2VyaWQiOiI4NmNjNTU4Zi04MzIxLTQyYmEtYjEzMi1mMzc5YzU5NDA5MDkiLCJpYXQiOjE2OTQ0MzIwNTQsImV4cCI6MTY5NDQ0NjQ1NH0.gE8Bophyusz20kii2AqbrJRIsNBCTARQlledJ3b2Mi0
 
 {
-    "email":"onan@gmail.com",
+    "email":"gift@gmail.com",
     "password":"pass"
 }
 
@@ -27,12 +28,12 @@ Content-Type: application/json
 ### Create Posts
 POST http://localhost:4505/posts/new-post
 Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9uYW4iLCJlbWFpbCI6Im9uYW5AZ21haWwuY29tIiwidXNlcmlkIjoiNDA3ZGMzZjgtN2ExZi00ZjgxLWJhOWUtNmVkZGRjNmE0N2M5IiwiaWF0IjoxNjk0MzkzMTEwLCJleHAiOjE2OTQ0MDc1MTB9.JnghgaDJXcPLa0e9_WyoLhPzUqpE1qcQuu_8fRBL934
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpZnQiLCJlbWFpbCI6ImdpZnRAZ21haWwuY29tIiwidXNlcmlkIjoiODFiMTgyMTItNmNiZS00ZDc2LTgzNjQtN2I3MjVkOTIxMWZjIiwiaWF0IjoxNjk0Njc3NzMzLCJleHAiOjE2OTQ2OTIxMzN9.v2xmnRjUhSkrIA5uJT7VJGo_xGahC6SHZS5fxmijtu0
 
 {    
-    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9",
-    "postCaption": "Goodtimes last",
-    "postImage": "nerea.png"
+    "userid": "a6b16797-e706-4e84-8a59-b020de5fa8f1",
+    "postCaption": "Goodtimes last tough people do",
+    "postImage": "/home/jidraph/Pictures/bottom.png"
 }
 
 
@@ -48,9 +49,12 @@ Content-Type: application/json
 token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWwiOiJrZXZpbjFAZ21haWwuY29tIiwidXNlcmlkIjoiM2E4NWI2NTYtZjVhYS00M2VmLWEyMzctZWE3OTFjZjA1YTJiIiwiaWF0IjoxNjk0MDg3ODU0LCJleHAiOjE2OTQxMDIyNTR9.7MU6gWNp90RMapegDlqVNlpMfp8u-ijK6Ari_QSJq14
 
 {
-    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9",
-    "postid": "762628e4-226e-4aac-84c7-8ef05e3dec25"
+    "userid": "81b18212-6cbe-4d76-8364-7b725d9211fc",
+    "postid": "e45f91cd-097b-4533-b16d-5377870a6491"
 }
+
+
+
 
 
 
@@ -59,8 +63,8 @@ POST http://localhost:4505/likes/checklikes
 Content-Type: application/json
 
 {
-    "postid": "3592bfd2-e726-4ca4-bd23-bde677f975fe",
-    "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b"
+    "postid": "8786834e-6de0-4c6e-acdc-5ec495adeaf7",
+    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
 }
 
 ### Unlike post
@@ -68,9 +72,15 @@ POST http://localhost:4505/likes/unlikepost
 Content-Type: application/json
 
 {
-   "postid": "3592bfd2-e726-4ca4-bd23-bde677f975fe",
-   "userid": "3a85b656-f5aa-43ef-a237-ea791cf05a2b"
+  "postid": "8786834e-6de0-4c6e-acdc-5ec495adeaf7",
+  "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
 }
+
+
+
+
+
+
 
 
 ### Comments
@@ -78,18 +88,18 @@ POST http://localhost:4505/comments/addcomment
 Content-Type: application/json
 
 {
-   "postid":"8d1bf9e5-cc79-4e6e-a6a8-53af05aeeb80",
-   "userid":"3a85b656-f5aa-43ef-a237-ea791cf05a2b",
-   "commentText": "wastage of our time"
+   "postid":"8786834e-6de0-4c6e-acdc-5ec495adeaf7",
+   "userid":"407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9",
+   "commentText": "neeeeeeeeeeew"
 }
 
 ### GetCommentsByPostID
-GET http://localhost:4505/comments/getcommentsbyid/8d1bf9e5-cc79-4e6e-a6a8-53af05aeeb80
+GET http://localhost:4505/comments/getcommentsbyid/8786834e-6de0-4c6e-acdc-5ec495adeaf7
 Content-Type: application/json
 
 # to be fixed *********************************
 ### edit comments 
-PUT http://localhost:4505/comments/editcomment/2ccf1694-c119-4071-8072-ba31a13dff43
+PUT http://localhost:4505/comments/editcomment/0b54b2fa-3363-403b-909e-422cfb418563
 
 {
     "commentText": "This is the edited comment"
@@ -106,8 +116,6 @@ Content-Type: application/json
     "followingUserId": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
 }
 
-
-
 ### unfollow
 POST http://localhost:4505/users/unfollow
 Content-Type: application/json
@@ -120,3 +128,19 @@ Content-Type: application/json
 ### count followers
 GET http://localhost:4505/users/countfollow/407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9
 
+
+### Get profile.
+GET http://localhost:4505/users/profile/81b18212-6cbe-4d76-8364-7b725d9211fc
+Content-Type: application/json
+
+
+
+### Update the profile
+PUT http://localhost:4505/users/updateprofile/81b18212-6cbe-4d76-8364-7b725d9211fc
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdpZnQiLCJlbWFpbCI6ImdpZnRAZ21haWwuY29tIiwidXNlcmlkIjoiODFiMTgyMTItNmNiZS00ZDc2LTgzNjQtN2I3MjVkOTIxMWZjIiwiaWF0IjoxNjk0NjE0ODQxLCJleHAiOjE2OTQ2MjkyNDF9.rr-SYdf350Aowh08JxcJoTsH7WhlyvTOLI_Lx0TTgss
+
+{
+    "bio": "kikifsdhfksdhfjsdkfki",
+    "profilePicture": "/home/jidraph/Pictures/Screenshot from 2023-06-27 20-18-23.png"
+}
