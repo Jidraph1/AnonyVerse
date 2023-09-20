@@ -44,3 +44,17 @@ BEGIN
     WHERE postid = @postid;
 END;
 GO
+
+
+-- Create a stored procedure to get posts by user ID
+CREATE PROCEDURE GetPostsByUserId
+    @userId NVARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    SELECT *
+    FROM Posts
+    WHERE userid = @userId;
+END;
+GO

@@ -44,16 +44,19 @@ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9uYW4iLCJlbWFpbCI6
 
 
 ### Delete Post
-DELETE  http://localhost:4505/posts/delete
+DELETE http://localhost:4505/posts/delete
 Content-Type: application/json
 token: eeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluIiwiZW1haWwiOiJrZXZpbjFAZ21haWwuY29tIiwidXNlcmlkIjoiM2E4NWI2NTYtZjVhYS00M2VmLWEyMzctZWE3OTFjZjA1YTJiIiwiaWF0IjoxNjk0MDg3ODU0LCJleHAiOjE2OTQxMDIyNTR9.7MU6gWNp90RMapegDlqVNlpMfp8u-ijK6Ari_QSJq14
 
 {
-    "userid": "81b18212-6cbe-4d76-8364-7b725d9211fc",
-    "postid": "e45f91cd-097b-4533-b16d-5377870a6491"
+    "userid": "0d75789a-f3bd-4b98-ad51-3cb0a573bd1c",
+    "postid": "88d05500-ab79-4e4c-95a5-89f6d6d28e0f"
 }
 
 
+### get post by userid
+GET http://localhost:4505/posts/postsbyuser/81b18212-6cbe-4d76-8364-7b725d9211fc
+Content-Type: application/json
 
 
 
@@ -63,8 +66,8 @@ POST http://localhost:4505/likes/checklikes
 Content-Type: application/json
 
 {
-    "postid": "8786834e-6de0-4c6e-acdc-5ec495adeaf7",
-    "userid": "407dc3f8-7a1f-4f81-ba9e-6edddc6a47c9"
+    "userid": "3985457b-df76-4e10-94dc-671691669231",
+    "postid": "1896159f-4497-4084-9c60-cd3e0b15fc45"
 }
 
 ### Unlike post
@@ -96,6 +99,11 @@ Content-Type: application/json
 ### GetCommentsByPostID
 GET http://localhost:4505/comments/getcommentsbyid/7ff97c74-9508-4f89-86fd-e2138b669f9e
 Content-Type: application/json
+
+
+### delete comment
+DELETE http://localhost:4505/comments/deletecomment/98e4c335-a8d0-4792-9526-2b9c60fdbcba
+
 
 # to be fixed *********************************
 ### edit comments 

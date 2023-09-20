@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { registerUser,loginUser, followUser, unfollowUser,getFollowersCount, updateProfile, getProfile} from "../Controllers/usersController.js";
-import { createPost, getAllPosts, deletePost, addComment, getCommentsByPostId, editComment } from "../Controllers/postsControllers.js";
+import { createPost, getAllPosts, deletePost, addComment, getCommentsByPostId, editComment, deleteComment, getPostsByUserId} from "../Controllers/postsControllers.js";
 import { likePost, unlikePost,} from "../Controllers/likesControllers.js";
 import { userAuth } from "../Middlewares/userMiddleware.js";
 // import { userAuth } from "../Middlewares/userMiddleware.js";
@@ -24,6 +24,7 @@ userRouter.put('/updateprofile/:userid',userAuth, updateProfile)
 postRouter.post('/new-post', createPost)
 postRouter.get('/posts', getAllPosts)
 postRouter.delete('/delete', deletePost)
+postRouter.get('/postsbyuser/:userid', getPostsByUserId)
 
 // Likes
 likeRouter.post('/checklikes',likePost)
@@ -33,6 +34,7 @@ likeRouter.post('/unlikepost',unlikePost)
 commentRouter.post('/addcomment', addComment)
 commentRouter.get('/getcommentsbyid/:postid', getCommentsByPostId);
 commentRouter.put('/editcomment/:commentid', editComment);
+commentRouter.delete('/deletecomment/:commentid', deleteComment);
 
 
 

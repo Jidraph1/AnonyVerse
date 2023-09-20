@@ -5,34 +5,40 @@ import { pool } from "../Config/config.js";
 
 export const createPost = async (req, res) => {
     try {
-        const {userid, postCaption, postImage } = req.body;
-
-        const postId = v4();
-        const postDate = new Date();
-
-        const conn = await pool;
-        if (conn.connected) {
-            const result = await conn
-                .request()
-                .input("postid", postId)
-                .input("userid", userid)
-                .input("postCaption", postCaption)
-                .input("postImage", postImage)
-                .input("postDate", postDate)
-                .execute("CreatePostProcedure");
-
-            if (result.rowsAffected[0] === 0) {
-                res.status(500).json({ Error: "Post not created" });
-            } else {
-                res.status(200).json({ message: "Post created successfully" });
-            }
+      const { userid, postCaption, postImage } = req.body;
+  
+      // Check if any of the required fields are missing
+      if (!userid || !postCaption || !postImage) {
+        return res.status(400).json({ Error: "Invalid request body" });
+      }
+  
+      const postId = v4();
+      const postDate = new Date();
+  
+      const conn = await pool;
+      if (conn.connected) {
+        const result = await conn
+          .request()
+          .input("postid", postId)
+          .input("userid", userid)
+          .input("postCaption", postCaption)
+          .input("postImage", postImage)
+          .input("postDate", postDate)
+          .execute("CreatePostProcedure");
+  
+        if (result.rowsAffected[0] === 0) {
+          res.status(500).json({ Error: "Post not created" });
         } else {
-            res.status(500).json({ message: "Error connecting to the database" });
+          res.status(200).json({ message: "Post created successfully" });
         }
+      } else {
+        res.status(500).json({ message: "Error connecting to the database" });
+      }
     } catch (error) {
-        res.status(500).json({ Error: error.message });
+      res.status(500).json({ Error: error.message });
     }
-};
+  };
+  
 
 
 export const getAllPosts = async (req, res) => {
@@ -102,6 +108,12 @@ export const addComment = async (req, res) => {
         // Get the current date and time
         const commentDate = new Date();
 
+        
+        if (!commentText) {
+          // Check if the commentText field is empty
+          res.status(400).json({ Error: "CommentText field cannot be empty" });
+          return; // Return early if validation fails
+        }
         const conn = await pool; 
 
         if (conn.connected) {
@@ -193,5 +205,57 @@ export const editComment = async (req, res) => {
     }
 };
 
+// Delete a comment
+export const deleteComment = async (req, res) => {
+    try {
+      const { commentid } = req.params;
+      const { userid } = req.body;
+  
+      const conn = await pool; // Assuming you have a database connection pool
+  
+      if (conn.connected) {
+        const deleteCommentQuery = `
+          EXEC DeleteComment @commentid, @userid;
+        `;
+  
+        await conn
+          .request()
+          .input('commentid', commentid)
+          .input('userid', userid)
+          .query(deleteCommentQuery);
+  
+        res.status(200).json({ message: 'Comment deleted successfully' });
+      } else {
+        res.status(500).json({ message: 'Error connecting to the database' });
+      }
+    } catch (error) {
+      res.status(500).json({ Error: error.message });
+    }
+  };
 
+  
 
+  export const getPostsByUserId = async (req, res) => {
+    const userid = req.params.userid;
+  
+    try {
+      const conn = await pool;
+      if (conn.connected) {
+        // Execute the stored procedure to get posts by user ID
+        const result = await conn
+          .request()
+          .input("userid", userid)
+          .execute("GetPostsByUserId");
+  
+        if (result.recordset.length === 0) {
+          res.status(404).json({ Error: 'No posts found for this user' });
+        } else {
+          res.status(200).json({ data: result.recordset });
+        }
+      } else {
+        res.status(500).json({ message: 'Error connecting to the database' });
+      }
+    } catch (error) {
+      res.status(500).json({ Error: error.message });
+    }
+  };

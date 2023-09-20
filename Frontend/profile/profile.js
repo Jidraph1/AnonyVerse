@@ -77,6 +77,16 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("User ID is undefined. Unable to fetch user profile.");
   }
+
+
+    // Call the renderUserPosts function with the user's ID when loading the profile page
+    if (userid) {
+      renderUserPosts(userid); // Pass the user ID
+    } else {
+      console.error("User ID is undefined. Unable to render user posts.");
+    }
+  
+
  
   profileForm.addEventListener("submit", async function (event) {
     event.preventDefault(); 
@@ -139,3 +149,92 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+
+  // Function to format the time as needed
+  function formatTime(time) {
+    // Implement your own logic to format the time, e.g., using the Date object
+    return new Date(time).toLocaleString();
+  }
+
+
+// Function to render user-specific posts
+async function renderUserPosts(userId) {
+  try {
+    const data = await fetch(`http://localhost:4505/posts/postsbyuser/${userId}`, {
+      method: "GET",
+    });
+
+    const posts = await data.json();
+    const userPostsContainer = document.getElementById("userPostsContainer");
+
+    // Clear existing posts in the userPostsContainer, if any
+    userPostsContainer.innerHTML = "";
+
+    // Loop through the posts and create HTML for each post
+    posts.data.forEach((post, index) => {
+      const modalId = `imageModal${post.postid}`;
+      const postCard = document.createElement("div");
+      postCard.classList.add("col-md-4");
+
+      postCard.innerHTML = `
+        <div class="card post-card">
+          <div class="card-body" style="height: 200px">
+            <img
+              src="${post.postImage}"
+              class="card-img-top mx-auto img-fluid clickable-image"
+              data-toggle="modal"
+              data-target="#${modalId}" <!-- Use the unique modalId here -->
+         
+          </div>
+        </div>
+
+        <!-- Modal Image -->
+        <div class="modal fade" id="${modalId}" tabindex="-1" role="dialog" aria-labelledby="${modalId}Label"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-body text-sm-start">
+                <img src="${post.postImage}" class="img-fluid" alt="dog post" />
+                <!-- Populate modal content based on post data here -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      userPostsContainer.appendChild(postCard);
+
+      // Add an event listener to open the modal and populate its content
+      postCard.querySelector(`.clickable-image`).addEventListener("click", () => {
+        const imageModal = document.getElementById(`${modalId}`);
+        const modalImage = imageModal.querySelector(".modal-body img");
+        const modalCaption = imageModal.querySelector(".modal-title");
+        const modalTime = imageModal.querySelector(".modal-time");
+
+        // Get data attributes from the clicked image
+        const caption = post.caption;
+        const src = post.postImage;
+        const time = post.timestamp;
+
+        // Set the modal content based on the clicked image
+        modalImage.src = src;
+        modalCaption.textContent = `"${caption}"`;
+        modalTime.textContent = formatTime(time); // Format the time as needed
+
+        // Open the modal
+        $(imageModal).modal("show");
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+

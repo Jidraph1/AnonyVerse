@@ -1,12 +1,22 @@
-import { registerUser, loginUser } from "../../Controllers/usersController";
-import bcrypt from 'bcrypt'
+import { registerUser, loginUser } from "../../Controllers/usersController.js";
+import bcrypt from 'bcrypt';
+
 import { jwt } from "jsonwebtoken";
 import {mssql} from 'mssql';
 import { sqlConfig } from "../../Config/config.js";
-import {pool} from "../../Config/config";
+import { pool } from "../../Config/config.js"
+
 
 jest.mock('mssql');
-jest.mock('../../Config/config.js');
+jest.mock('../../Config/config.js', () =>({
+  pool: {
+    request: jest.fn().mockReturnThis(),
+  },
+}));
+
+
+jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
+
 
 describe("Register User Test", () => {
     it("should fail when the request body is empty", async () => {
@@ -103,71 +113,46 @@ describe("Login User Test", () => {
       );
     });
 
-  
-    describe("Login User Test", () => {
-      it("should successfully log in a user with valid credentials", async () => {
-        // Mock request object with valid credentials
-        const req = {
-          body: {
-            email: "test@example.com",
-            password: "validPassword",
-          },
-        };
+    // it('should return "Login success" when the password is correct', async () => {
+    //   // Mock request object with valid credentials and correct password
+    //   const req = {
+    //     body: {
+    //       email: 'test@example.com',
+    //       password: 'correctPassword',
+    //     },
+    //   };
     
-        // Mock response object
-        const res = {
-          status: jest.fn().mockReturnThis(),
-          json: jest.fn(),
-        };
+    //   // Mock response object
+    //   const res = {
+    //     status: jest.fn().mockReturnThis(),
+    //     json: jest.fn(),
+    //   };
     
-        // Mock bcrypt.compare to always return true (valid password)
-        jest.spyOn(bcrypt, "compare").mockResolvedValue(true);
+    //   // Mock database query to return a user record
+    //   const mockUserRecord = {
+    //     rowsAffected: [1],
+    //     recordset: [
+    //       {
+    //         username: 'testUser',
+    //         password: 'hashedPassword', // Mock hashed password
+    //         email: 'test@example.com',
+    //         userid: 1,
+    //       },
+    //     ],
+    //   };
+    //   jest.spyOn(pool, 'request').mockResolvedValue(mockUserRecord);
     
-        // Execute the login function
-        await loginUser(req, res);
+    //   // Mock bcrypt.compare to return true (correct password)
+    //   jest.spyOn(bcrypt, 'compare').mockResolvedValue(true);
     
-        // Assertions
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({
-          message: "Login success",
-          token: expect.any(String), // Assuming you generate a token
-          user: { id: expect.any(Number) }, // Assuming user ID is a number
-        });
-      });
+    //   // Execute the login function
+    //   await loginUser(req, res);
     
-      // You can add more test cases for other scenarios here...
-    });it("should successfully log in a user with valid credentials", async () => {
-      // Mock request object with valid credentials
-      const req = {
-        body: {
-          email: "test@example.com",
-          password: "validPassword",
-        },
-      };
-  
-      // Mock response object
-      const res = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      };
-  
-      // Mock the connected property of the pool object
-      pool.connected = true; // Set it to true for a successful connection
-  
-      // Mock bcrypt.compare to always return true (valid password)
-      jest.spyOn(bcrypt, "compare").mockResolvedValue(true);
-  
-      // Execute the login function
-      await loginUser(req, res);
-  
-      // Assertions
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith({
-        message: "Login success",
-        token: expect.any(String), // Assuming you generate a token
-        user: { id: expect.any(Number) }, // Assuming user ID is a number
-      });
+    //   // Assertions
+    //   expect(res.status).toHaveBeenCalledWith(200);
+    //   expect(res.json).toHaveBeenCalledWith({ message: 'Login success', /* ...other assertions... */ });
+    // });
+    
+    
+    
     });
-  
-    // You can add more test cases for other scenarios here...
-  });

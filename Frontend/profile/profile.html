@@ -89,6 +89,7 @@
             <iconify-icon icon="icon-park-twotone:add" style="font-size: 35px"></iconify-icon>
             <h4 class="title mt-2">Add Post</h4>
           </a>
+          
         </div>
 
         <!-- Push the Logout button to the bottom -->
@@ -113,7 +114,9 @@
           <!-- Profile picture -->
           <img src="../statics/images/paul.png" alt="Profile Picture" class="profile-image " />
           <!-- Username -->
-          <h2>Kenneth_the_first</h2>
+          <h2>Stranger</h2>
+          <h6>About:</h6>
+          <p class="bio-paragraph">
           <!-- Follower/Following counts -->
           <p>Followers: 1000 | Following: 500</p>
           <a href="../followersfollowing/followersfollowing.html" class="btn btn-outline-primary">Followers &
@@ -140,85 +143,44 @@
           <div class="container profile-info">
             <!-- Previous posts -->
             <h3>Previous Posts</h3>
-            <div class="row post-container">
+            <div class="row post-container" id="userPostsContainer">
               <!-- Post 1 -->
               <div class="col-md-4">
                 <div class="card post-card">
                   <div class="card-body" style="height: 200px">
                     <!-- Adjust the height as needed -->
-                    <img src="../statics/images/bike.jpg" class="card-img-top mx-auto img-fluid clickable-image"
-                      data-toggle="modal" data-target="#imageModal" alt="dog post" style="
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                        border-radius: 10px;
-                      " />
+                    <img
+                      src="${post.postImage}"
+                      class="card-img-top mx-auto img-fluid clickable-image"
+                      data-toggle="modal"
+                      data-target="#imageModal"
+                      data-caption="${post.caption}"
+                      data-src="${post.postImage}"
+                      data-time="${post.timestamp}"
+                      alt="post image"
+                      style="object-fit: cover; max-width: 100%; max-height: 100%; border-radius: 10px;"
+                    />
                   </div>
                 </div>
               </div>
 
-              <!-- Add more posts as needed -->
-              <div class="col-md-4">
-                <div class="card post-card">
-                  <div class="card-body" style="height: 200px">
-                    <!-- Adjust the height as needed -->
-                    <img src="../statics/images/Drinks.jpg" class="card-img-top mx-auto img-fluid" alt="dog post" style="
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                        border-radius: 10px;
-                      " />
-                  </div>
-                </div>
-              </div>
+             
 
-              <!-- Post 2 -->
-              <div class="col-md-4">
-                <div class="card post-card">
-                  <div class="card-body" style="height: 200px">
-                    <!-- Adjust the height as needed -->
-                    <img src="../statics/images/lab.jpg" class="card-img-top mx-auto img-fluid" alt="dog post" style="
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                        border-radius: 10px;
-                      " />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Add more posts as needed -->
-              <div class="col-md-4">
-                <div class="card post-card">
-                  <div class="card-body" style="height: 200px">
-                    <!-- Adjust the height as needed -->
-                    <img src="../statics/images/Diary-bro1.svg" class="card-img-top mx-auto img-fluid" alt="dog post"
-                      style="
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                        border-radius: 10px;
-                      " />
-                  </div>
-                </div>
-              </div>
+             
             </div>
           </div>
 
           <!-- Modal Image -->
-          <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+          <!-- <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content">
                 <div class="modal-body text-sm-start">
-                  <!-- Display the image -->
-                  <img src="../statics/images/bike.jpg" class="img-fluid" alt="dog post" />
 
-                  <!-- Display comments from previous posts -->
-                  <h5 class="modal-title" id="imageModalLabel">
-                    Image Caption
-                  </h5>
-                  <p>
+                  <img src="${post.postImage}" class="img-fluid" alt="dog post" />
+
+                 
+                  <p >
                     “Tough Times Don't last, Tough People do. Because no good
                     story starts with that one time I ate salad”
                   </p>
@@ -240,9 +202,9 @@
                       </div>
                     </div>
 
-                    <!-- Child comment with greater left margin -->
+                    
                     <div class="comment-card child-comment">
-                      <h6 class="mt-3">Daniel Karanja</h6>
+                      <h6 class="mt-3">Stranger</h6>
                       <p>
                         Behind every successful person, there is a lot of
                         coffee."
@@ -253,19 +215,19 @@
                         </button>
                         <button class="btn btn-danger btn-sm">Delete</button>
                       </div>
-                      <!-- Add more child comments as needed -->
+
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <!-- Close button -->
+                  
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">
                     Close
                   </button>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
       </main>
 
       <!-- Right side (col-md-3) disappears on smaller screens -->
@@ -273,7 +235,7 @@
         <!-- <aside class="col-md-2 d-md-block d-none"> -->
         <div class="upper rounded-top-left rounded-top-right text-center">
           <p>
-            <img src="" class="rounded-circle mt-2 align-self-start profile-image"
+            <!-- <img src="" class="rounded-circle mt-2 align-self-start profile-image"
               style="width: 40px; height: 40px" />
             Kenneth_the_first
           </p>
@@ -284,9 +246,9 @@
           <h6>About:</h6>
           <p class="bio-paragraph">
             
-          </p>
+          </p> -->
 
-          <h6>People of interest</h6>
+          <!-- <h6>People of interest</h6> -->
           <input class="form-control form-control-sm mt-4 search_bar" type="text" placeholder="Search"
             aria-label=".form-control-sm example" style="
                 border: none;
@@ -304,17 +266,17 @@
             ">
           <div class="card-body">
             <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px" />
-            <small class="card-title">Daniel Karanja</small>
+            <small class="card-title">Stranger</small>
             <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center">Follow</a>
           </div>
           <div class="card-body">
             <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px" />
-            <small class="card-title">Daniel Karanja</small>
+            <small class="card-title">Stranger</small>
             <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center">Follow</a>
           </div>
           <div class="card-body">
             <img src="../statics/images/paul.png" class="rounded-circle" style="width: 40px; height: 40px" />
-            <small class="card-title">Daniel Karanja</small>
+            <small class="card-title">Stranger</small>
             <a href="#" class="btn btn-primary btn-sm mt-2" style="max-height: 30px; text-align: center">Follow</a>
           </div>
         </div>
