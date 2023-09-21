@@ -3,7 +3,7 @@ import {
   getAllPosts,
   addComment,
   getCommentsByPostId,
-  deleteComment
+  deleteComment,
 } from "../../Controllers/postsControllers.js";
 
 import { jwt } from "jsonwebtoken";
@@ -306,7 +306,6 @@ describe("Add Comment Controller Tests", () => {
         json: jest.fn(),
       };
     
-      // Mock the 'query' method to throw an exception
       jest.spyOn(pool, 'request').mockRejectedValueOnce(new Error('Database error'));
     
       // Call the controller
